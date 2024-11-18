@@ -18,7 +18,7 @@ function display_usage() {
 
 trap interrupt SIGINT
 
-NAME="SHT7-simulator"
+NAME="SHT75-simulator"
 
 VALID_ARGS=$(getopt -o hp:t: --long help,period:,port: -- "$@")
 if [[ $? -ne 0 ]]; then
@@ -39,7 +39,7 @@ while [ : ]; do
       ;;
     -t | --period)
         if [[ $2 =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
-          PERIOD_6=$(awk "BEGIN {print $2 / 6}")
+          PERIOD=$2
           shift 2
         else
           display_usage
@@ -57,7 +57,7 @@ while [ : ]; do
   esac
 done
 
-if [[ -z "$PERIOD_6" ]]; then
+if [[ -z "$PERIOD" ]]; then
     "echo T"
     display_usage
     exit 1;
@@ -68,6 +68,8 @@ if [[ -z "$PORT" ]]; then
     display_usage
     exit 1;
 fi
+PERIOD_6=$(awk "BEGIN {print $PERIOD / 6}")
+echo "Streaming simulated SHT75 data with period of $PERIOD seconds"
 
 while :
 do
