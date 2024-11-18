@@ -39,7 +39,7 @@ while [ : ]; do
       ;;
     -t | --period)
         if [[ $2 =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
-          PERIOD_6=$("$2"/6)
+          PERIOD_6=$(awk "BEGIN {print $2 / 6}")
           shift 2
         else
           display_usage
