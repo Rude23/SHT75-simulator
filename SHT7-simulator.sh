@@ -39,7 +39,7 @@ while [ : ]; do
       ;;
     -t | --period)
         if [[ $2 =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
-          PERIOD_3=$2
+          PERIOD_6=$("$2"/6)
           shift 2
         else
           display_usage
@@ -57,7 +57,7 @@ while [ : ]; do
   esac
 done
 
-if [[ -z "$PERIOD_3" ]]; then
+if [[ -z "$PERIOD_6" ]]; then
     "echo T"
     display_usage
     exit 1;
@@ -71,10 +71,16 @@ fi
 
 while :
 do
-  sleep "$PERIOD_3";
-  echo -n -e '\xAA\xAA' > "$PORT";
-  sleep "$PERIOD_3";
+  sleep "$PERIOD_6";
+  echo -n -e 'AA' > "$PORT";
+  sleep "$PERIOD_6";
+  echo -n -e 'AA' > "$PORT";
+  sleep "$PERIOD_6";
   hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
-  sleep "$PERIOD_3";
+  sleep "$PERIOD_6";
+  hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
+  sleep "$PERIOD_6";
+  hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
+  sleep "$PERIOD_6";
   hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
 done
