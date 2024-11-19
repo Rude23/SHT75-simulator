@@ -65,21 +65,39 @@ if [[ -z "$PORT" ]]; then
     display_usage
     exit 1;
 fi
-PERIOD_6=$(awk "BEGIN {print $PERIOD / 6}")
 echo "Streaming simulated SHT75 data with period of $PERIOD seconds"
 
 while :
-do
-  sleep "$PERIOD_6";
-  echo -n -e 'AA' > "$PORT";
-  sleep "$PERIOD_6";
-  echo -n -e 'AA' > "$PORT";
-  sleep "$PERIOD_6";
-  hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
-  sleep "$PERIOD_6";
-  hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
-  sleep "$PERIOD_6";
-  hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
-  sleep "$PERIOD_6";
-  hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
-done
+  do
+    ## TODO: group repeated code
+    BEGIN=$(date +%s%3N);
+    echo -n -e 'AA' > "$PORT";
+    TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
+    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/6}')"
+
+    BEGIN=$(date +%s%3N);
+    echo -n -e 'AA' > "$PORT";
+    TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
+    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/6}')"
+
+    BEGIN=$(date +%s%3N);
+    hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
+    TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
+    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/6}')"
+
+    BEGIN=$(date +%s%3N);
+    hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
+    TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
+    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/6}')"
+
+    BEGIN=$(date +%s%3N);
+    hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
+    TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
+    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/6}')"
+
+    BEGIN=$(date +%s%3N);
+    hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
+    TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
+    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/6}')"
+
+  done
