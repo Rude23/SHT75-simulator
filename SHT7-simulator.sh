@@ -80,27 +80,27 @@ while :
     BEGIN=$(date +%s%3N);
     echo -n -e 'AA' > "$PORT";
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
-    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/6}')"
+    sleep "$(LC_NUMERIC=C awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/6}')"
 
     echo -n -e 'AA' > "$PORT";
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
-    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/5}')"
+    sleep "$(LC_NUMERIC=C awk 'BEGIN { printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/5}')"
 
     hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
-    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/4}')"
+    sleep "$(LC_NUMERIC=C awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/4}')"
 
     hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
-    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/3}')"
+    sleep "$(LC_NUMERIC=C awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/3}')"
 
     hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
-    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/2}')"
+    sleep "$(LC_NUMERIC=C awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/2}')"
 
     hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
-    sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)}')"
+    sleep "$(LC_NUMERIC=C awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)}')"
 
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
     if [[ -n $DEBUG ]]
