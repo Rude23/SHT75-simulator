@@ -47,7 +47,6 @@ while [ : ]; do
         fi
         ;;
     -h | --help)
-        "echo H"
         display_usage
         exit 0
         ;;
@@ -58,13 +57,11 @@ while [ : ]; do
 done
 
 if [[ -z "$PERIOD" ]]; then
-    "echo T"
     display_usage
     exit 1;
 fi
 
 if [[ -z "$PORT" ]]; then
-    "echo P"
     display_usage
     exit 1;
 fi
