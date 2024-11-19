@@ -11,16 +11,19 @@ function display_usage() {
     echo "LM17 master degree during A.A. 2024-2025"
     echo ""
     echo "Usage: $NAME {[-p --port] [-d --debug] [-t --period] | -h --help}"
+    echo "Options:"
+    echo "  -d --debug   : enable debug"
     echo "Arguments:"
-    echo "  -p --port     : (virtual) usb port to write bytes to"
+    echo "  -p --port    : (virtual) usb port to write bytes to"
     echo "  -t --period  : Specify the period (in seconds) for a full data (end-word, T, HR) sampling cycle"
 }
 
 trap interrupt SIGINT
 
 NAME="SHT75-simulator"
+DEBUG=
 
-VALID_ARGS=$(getopt -o hp:t: --long help,period:,port: -- "$@")
+VALID_ARGS=$(getopt -o hdp:t: --long help,debug,period:,port: -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
@@ -28,6 +31,10 @@ fi
 eval set -- "$VALID_ARGS"
 while [ : ]; do
   case "$1" in
+    -d | --debug)
+        DEBUG="-d"
+        shift
+        ;;
     -p | --port)
       if [ -n "$2" ]; then
         PORT=$2
@@ -95,4 +102,9 @@ while :
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
     sleep "$(awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)}')"
 
+    TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
+    if [[ -n $DEBUG ]]
+    then
+      echo "simulated full word in $TIME_ELAPSED ms"
+    fi
   done
