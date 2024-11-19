@@ -6,7 +6,7 @@ function interrupt(){
 }
 
 function display_usage() {
-    echo "$NAME is a simple script to simulate SHT75 data stream sampled through an XXXXXXXXX programmable microcontroller" #TODO: inserire nome scheda
+    echo "$NAME is a simple script to simulate SHT75 data stream sampled through an Artix-7 FPGA"
     echo "developed as a tool for studying data acquisition required in lab classes for \"università degli studi di Napoli Federico II\""
     echo "LM17 master degree during A.A. 2024-2025"
     echo ""
