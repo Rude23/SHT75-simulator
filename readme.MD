@@ -1,6 +1,6 @@
 # SHT75 Data Stream Simulator
 
-This script simulates a data stream from the **SHT75** sensor, which is sampled through an XXXXX **programmable microcontroller**. The tool is designed for studying data acquisition techniques used in **lab classes** at **Università degli Studi di Napoli Federico II**, part of the **LM17 Master’s degree** program during the academic year **2024-2025**.
+This script simulates a data stream from the **SHT75** sensor, which is sampled through an **Artix-7 FPGA**. This tool is designed for studying data acquisition techniques used in **lab classes** at **Università degli Studi di Napoli Federico II**, part of the **LM17 Master’s degree** program during the academic year **2024-2025**.
 
 ## Table of Contents
 
