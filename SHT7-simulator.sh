@@ -78,27 +78,23 @@ while :
   do
     ## TODO: group repeated code
     BEGIN=$(date +%s%3N);
-    echo -n -e 'AA' > "$PORT";
+    printf "%b" '\xaa\xaa' > "$PORT";
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
-    sleep "$(LC_NUMERIC=C awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/6}')"
+    sleep "$(LC_NUMERIC=C awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/5}')"
 
-    echo -n -e 'AA' > "$PORT";
-    TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
-    sleep "$(LC_NUMERIC=C awk 'BEGIN { printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/5}')"
-
-    hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
+    printf "%b" "\x$(hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom)" > "$PORT";
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
     sleep "$(LC_NUMERIC=C awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/4}')"
 
-    hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
+    printf "%b" "\x$(hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom)" > "$PORT";
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
     sleep "$(LC_NUMERIC=C awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/3}')"
 
-    hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
+    printf "%b" "\x$(hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom)" > "$PORT";
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
     sleep "$(LC_NUMERIC=C awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)/2}')"
 
-    hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom > "$PORT";
+    printf "%b" "\x$(hexdump -vn 1 -e '1/1 "%02x"' /dev/urandom)" > "$PORT";
     TIME_ELAPSED=$(($(date +%s%3N) - BEGIN))
     sleep "$(LC_NUMERIC=C awk 'BEGIN {printf "%.3f", ('"$PERIOD"' - '"$TIME_ELAPSED"'/1000)}')"
 
