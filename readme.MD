@@ -65,10 +65,9 @@ Requirements
 
 To use this script, you'll need the following tools:
 
-- socat: A utility to create virtual ports.
-- bash: The script is written in bash, which is standard on most Linux distributions.
+- socat: to create virtual ports.
+- bash: which is standard shell on most POSIX systems.
 
-Both of these are typically available in most Linux package repositories. To install them, use the following commands:
 ### On Debian-based systems (Ubuntu, etc.):
 ```
 sudo apt update
@@ -78,6 +77,12 @@ sudo apt install socat bash
 ```
 sudo yum install socat bash
 ```
+### On macOS:
+```
+brew install socat
+brew install bash
+```
+
 ## Copyleft
 
 This software is released under the Copyleft license, which means you are free to use, modify, and distribute this software, provided that any derivative works are also licensed under the same terms.
